@@ -179,7 +179,7 @@ fn any_escape_sequence(s: &[u8]) -> IResult<&[u8], Option<&[u8]>> {
     preceded(
         char('\x1b'),
         opt(alt((
-            delimited(char('['), take_till(|c| is_alphabetic(c)), opt(take(1u8))),
+            delimited(char('['), take_till(is_alphabetic), opt(take(1u8))),
             delimited(char(']'), take_till(|c| c == b'\x07'), opt(take(1u8))),
         ))),
     )(s)
